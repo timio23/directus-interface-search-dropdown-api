@@ -1,0 +1,30 @@
+{
+	"name": "directus-interface-search-dropdown-api",
+	"version": "1.0.0",
+	"description": "",
+	"author": "Tim Butterfield",
+	"scripts": {
+		"build": "directus-extension build"
+	},
+	"devDependencies": {
+		"@directus/extensions-sdk": "9.2.1",
+		"@rollup/plugin-json": "4.1.0",
+		"sass": "1.43.4"
+	},
+	"directus:extension": {
+		"type": "interface",
+		"path": "dist/index.js",
+		"source": "src/index.js",
+		"host": "^9.2.1",
+		"hidden": false
+	},
+	"dependencies": {
+		
+	},
+	"keywords": [
+		"directus",
+		"directus-extension",
+		"directus-custom-interface"
+	],
+	"license": "ISC"
+}
