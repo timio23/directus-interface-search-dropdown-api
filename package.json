@@ -1,6 +1,7 @@
 {
-	"name": "directus-interface-search-dropdown-api",
+	"name": "directus-extension-search-dropdown-api-interface",
 	"version": "1.0.0",
+	"files": ["dist"],
 	"description": "",
 	"author": "Tim Butterfield",
 	"scripts": {
