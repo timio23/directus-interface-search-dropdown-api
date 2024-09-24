@@ -57,7 +57,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useApi, useStores } from '@directus/extensions-sdk';
 export default {
 	props: {
@@ -85,6 +85,10 @@ export default {
 			type: String,
 			default: 'name',
 		},
+		sort: {
+			type: String,
+			default: null,
+		},
 		width: {
 			type: String,
 			required: true,
@@ -106,7 +110,7 @@ export default {
 
 		const primaryKey = fieldsStore.getPrimaryKeyFieldForCollection(relatedCollection.value.collection);
 
-		var awaitingSearch = false;
+		const awaitingSearch = ref(false);
 		const results = ref([]);
 		const searchQuery = ref('');
 		
@@ -118,6 +122,7 @@ export default {
 							limit: -1,
 							filter: props.filter,
 							search: (searchQuery.value && searchQuery.value != props.value?searchQuery.value:''),
+							sort: props.sort ? [props.sort] : [primaryKey.field],
 						},
 					}
 				);
@@ -132,7 +137,9 @@ export default {
 			}
 		}
 
-		fetchResults();
+		onMounted(() => {
+			fetchResults();
+		});
 
 		return { results, setDropdown, searchQuery, displayField, onInput, primaryKey, outputFields };
 
@@ -147,13 +154,13 @@ export default {
 		}
 
 		function onInput() {
-			if (!awaitingSearch) {
+			if (!awaitingSearch.value) {
 				setTimeout(() => {
 					fetchResults();
-					awaitingSearch = false;
+					awaitingSearch.value = false;
 				}, 500); // 0.5 sec delay
 			}
-			awaitingSearch = true;
+			awaitingSearch.value = true;
 		}
 
 		function setDropdown(item) {

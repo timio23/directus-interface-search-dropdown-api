@@ -26,6 +26,19 @@ export default {
 				},
 			},
 			{
+				field: 'sort',
+				type: 'string',
+				name: '$t:$t:sort_field',
+				meta: {
+					interface: 'system-field',
+					options: {
+						collectionName: collection,
+						placeholder: '$t:select_a_field',
+					},
+					width: 'half',
+				},
+			},
+			{
 				field: 'placeholder',
 				type: 'string',
 				name: 'Placeholder',
